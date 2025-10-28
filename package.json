@@ -5,18 +5,25 @@
     "server": "nodemon index.js",
     "start": "node index.js",
     "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "resetdb": "npm run rollback && npm run migrate && npm run seed",
     "seed": "knex seed:run",
-    "ketchup": "git fetch && git reset --hard origin/lecture"
+    "ketchup": "git fetch && git reset --hard origin/lecture",
+    "test": " cross-env NODE_ENV=testing jest --verbose --watchAll --runInBand"
   },
   "dependencies": {
-    "sqlite3": "^5.1.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "knex": "^2.4.2"
+    "knex": "^2.4.2",
+    "sqlite3": "^5.1.4"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "cross-env": "^10.1.0",
     "eslint": "^8.36.0",
-    "nodemon": "^2.0.21"
+    "jest": "^30.2.0",
+    "nodemon": "^2.0.21",
+    "supertest": "^7.1.4"
   },
   "repository": {
     "type": "git",

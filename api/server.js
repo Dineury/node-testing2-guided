@@ -20,20 +20,23 @@ server.get("/hobbits", (req, res) => {
     });
 });
 
-server.get("/hobbits/id", (req, res) => {
-  res.end()
+server.get("/hobbits/:id", async  (req, res) => {
+ const hobi = await Hobbits.getById(req.params.id)
+  res.json(hobi)
 });
 
-server.post("/hobbits", (req, res) => {
-  res.end()
+server.post("/hobbits", async (req, res) => {
+  res.status(201).json(await Hobbits.insert(req.body))
 });
 
-server.delete("/hobbits/:id", (req, res) => {
-  res.end()
+server.delete("/hobbits/:id", async (req, res) => {
+  await Hobbits.remove(req.params.id)
+  res.json(await Hobbits.getAll())
 });
 
-server.put("/hobbits/:id", (req, res) => {
-  res.end()
+server.put("/hobbits/:id", async (req, res) => {
+  await Hobbits.update(req.params.id, req.body)
+  res.json(await Hobbits.getById(req.params.id))
 });
 
 module.exports = server;
